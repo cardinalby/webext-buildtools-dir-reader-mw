@@ -1,0 +1,57 @@
+{
+  "name": "webext-buildtools-dir-reader-mw",
+  "version": "1.0.0",
+  "description": "webext-buildtools builder for packing extension directory to zip and reading manifest",
+  "main": "dist",
+  "keywords": [
+    "webext-buildtools",
+    "middleware",
+    "webextension",
+    "build",
+    "directory",
+    "zip",
+    "manifest",
+    "pack",
+    "file"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cardinalby/webext-buildtools-dir-reader-mw"
+  },
+  "homepage": "https://github.com/cardinalby/webext-buildtools-dir-reader-mw",
+  "author": "cardinalby",
+  "license": "MIT",
+  "files": [
+    "dist/**/*.d.ts",
+    "dist/**/*.js",
+    "declarations/**/*.d.ts",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "webext-buildtools-utils": "^1.0.1",
+    "fs-extra": "^7.0.1",
+    "archiver": "^3.0.0",
+    "typescript-is": "^0.9.3",
+    "stream-buffers": "^3.0.2"
+  },
+  "devDependencies": {
+    "webext-buildtools-builder-types": "^1.0.6",
+    "@types/node": "^10.12.20",
+    "@types/fs-extra": "^5.0.4",
+    "@types/archiver": "^2.1.2",
+    "@types/stream-buffers": "^3.0.2",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4",
+    "ttypescript": "^1.5.6"
+  },
+  "scripts": {
+    "build": "ttsc",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
+  }
+}
