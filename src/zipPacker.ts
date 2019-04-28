@@ -1,12 +1,7 @@
 import * as arc from 'archiver';
 import { Archiver, ArchiverOptions } from 'archiver';
 import * as streamBuffers from 'stream-buffers';
-
-export interface IZipOptions {
-    globPattern?: string;
-    ignore?: string[];
-    archiverOptions?: ArchiverOptions;
-}
+import { IZipOptions } from '../declarations/zipOptions';
 
 // noinspection JSUnusedGlobalSymbols
 export class ZipPacker {
