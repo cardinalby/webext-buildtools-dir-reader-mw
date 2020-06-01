@@ -1,6 +1,6 @@
 import * as arc from 'archiver';
 import { Archiver, ArchiverOptions } from 'archiver';
-import * as streamBuffers from 'stream-buffers';
+import { WritableStreamBuffer } from 'webext-buildtools-utils';
 import { IZipOptions } from '../declarations/zipOptions';
 
 // noinspection JSUnusedGlobalSymbols
@@ -23,10 +23,17 @@ export class ZipPacker {
     public pack(): Promise<Buffer> {
         return new Promise((resolve, reject) => {
             const archive = arc('zip', this.archiverOptions);
-            const outputStreamBuffer = new streamBuffers.WritableStreamBuffer({ initialSize: 2048 });
+            const outputStreamBuffer = new WritableStreamBuffer({ initialSize: 2048 });
 
             archive.on('error', reject);
-            archive.on('finish', () => resolve(outputStreamBuffer.getContents()));
+            archive.on('finish', () => {
+                const contents = outputStreamBuffer.getContents();
+                if (contents !== false) {
+                    resolve(contents)
+                } else {
+                    reject(new Error('Empty buffer'));
+                }
+            });
             archive.pipe(outputStreamBuffer);
 
             this.appendToArchive(archive);
