@@ -1,6 +1,6 @@
 {
   "name": "webext-buildtools-dir-reader-mw",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "webext-buildtools builder for packing extension directory to zip and reading manifest",
   "main": "dist",
   "keywords": [
@@ -35,13 +35,13 @@
     "stream-buffers": "^3.0.2"
   },
   "devDependencies": {
-    "webext-buildtools-builder-types": "^1.0.7",
+    "webext-buildtools-builder-types": "^1.0.8",
     "@types/node": "^10.12.20",
     "@types/fs-extra": "^5.0.4",
     "@types/archiver": "^2.1.2",
     "@types/stream-buffers": "^3.0.2",
     "tslint-config-prettier": "^1.17.0",
-    "tslint": "^5.17.0",
+    "tslint": "^6.1.2",
     "typescript": "^3.2.4",
     "ttypescript": "^1.5.6"
   },
