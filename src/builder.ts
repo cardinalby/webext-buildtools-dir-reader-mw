@@ -74,7 +74,7 @@ export class DirReaderBuilder
             this._logWrapper.info(`Reading '${manifestFilePath}'...`);
             const data = await fs.readJSON(manifestFilePath);
             try {
-                assertType<IManifestObject>(data);
+                this.validateManifestObject(data);
             }
             catch (err) {
                 throw new Error(`Manifest validation error. ${err.message}`);
@@ -112,5 +112,17 @@ export class DirReaderBuilder
         }
 
         return result;
+    }
+
+    private validateManifestObject(data: { [k: string]: any }) {
+        if (typeof data.manifest_version !== 'number') {
+            throw new Error('manifest_version is missing');
+        }
+        if (typeof data.name !== 'string') {
+            throw new Error('name is missing');
+        }
+        if (typeof data.version !== 'string') {
+            throw new Error('version is missing');
+        }
     }
 }
