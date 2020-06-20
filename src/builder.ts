@@ -9,7 +9,7 @@ import {
 } from 'webext-buildtools-utils';
 import { IDirReaderOptions } from '../declarations/options';
 import { DirReaderBuildResult, ManifestBuildAsset } from './buildResult';
-import { IManifestObject } from './manifest';
+import { IManifestObject } from '../declarations/manifest';
 import { ZipPacker } from './zipPacker';
 
 // noinspection JSUnusedGlobalSymbols

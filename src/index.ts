@@ -1,6 +1,7 @@
 import { DirReaderBuilder } from './builder';
 export { IDirReaderOptions } from '../declarations/options';
 export { IZipOptions } from '../declarations/zipOptions';
+export { IManifestObject } from '../declarations/manifest';
 
 export default DirReaderBuilder;
 
