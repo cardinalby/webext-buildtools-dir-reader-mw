@@ -1,5 +1,10 @@
-import { BaseBuildResult, BasicTypeBuildAsset, BufferBuildAsset, FileBuildAsset } from 'webext-buildtools-utils';
-import { IManifestObject } from '../declarations/manifest';
+import {
+    BaseBuildResult,
+    BasicTypeBuildAsset,
+    BufferBuildAsset,
+    FileBuildAsset,
+    IManifestObject
+} from 'webext-buildtools-utils';
 
 export class ManifestBuildAsset extends BasicTypeBuildAsset<IManifestObject> {}
 

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/cardinalby/webext-buildtools-dir-reader-mw.svg?branch=master)](https://travis-ci.com/cardinalby/webext-buildtools-dir-reader-mw)
+![npm-publish](https://github.com/cardinalby/webext-buildtools-dir-reader-mw/workflows/npm-publish/badge.svg)
 ### Introduction
 *webext-buildtools* middleware builder for reading manifest file and packing Web Extension directory to zip file.
 Expected to be used to provide inputs for further builders. 

@@ -1,15 +1,14 @@
-import * as fs from 'fs-extra';
 import * as path from "path";
-import { assertType } from 'typescript-is';
 import { ISimpleBuilder } from 'webext-buildtools-builder-types';
 import {
     AbstractSimpleBuilder,
     BufferBuildAsset,
-    FileBuildAsset
+    FileBuildAsset,
+    validateManifestFile,
+    MANIFEST_FILE_NAME
 } from 'webext-buildtools-utils';
 import { IDirReaderOptions } from '../declarations/options';
 import { DirReaderBuildResult, ManifestBuildAsset } from './buildResult';
-import { IManifestObject } from '../declarations/manifest';
 import { ZipPacker } from './zipPacker';
 
 // noinspection JSUnusedGlobalSymbols
@@ -19,7 +18,7 @@ export class DirReaderBuilder
 {
     public static readonly TARGET_NAME = 'webext-dir-reader';
     public static readonly MANIFEST_FILE_NAME = 'manifest.json';
-    
+
     protected _inputDirPath?: string;
     protected _zipFileRequirement?: boolean;
     protected _zipBufferRequired: boolean = false;
@@ -38,6 +37,7 @@ export class DirReaderBuilder
 
     // noinspection JSUnusedGlobalSymbols
     public requireZipFile(temporary: boolean = false): this {
+        // noinspection PointlessBooleanExpressionJS
         this._zipFileRequirement = !!temporary;
         return this;
     }
@@ -70,16 +70,9 @@ export class DirReaderBuilder
         }
 
         if (this._manifestRequired) {
-            const manifestFilePath = path.join(this._inputDirPath, DirReaderBuilder.MANIFEST_FILE_NAME);
+            const manifestFilePath = path.join(this._inputDirPath, MANIFEST_FILE_NAME);
             this._logWrapper.info(`Reading '${manifestFilePath}'...`);
-            const data = await fs.readJSON(manifestFilePath);
-            try {
-                this.validateManifestObject(data);
-            }
-            catch (err) {
-                throw new Error(`Manifest validation error. ${err.message}`);
-            }
-
+            const data = validateManifestFile(manifestFilePath);
             this._logWrapper.info(`Manifest asset added to result`);
             result.getAssets().manifest = new ManifestBuildAsset(data);
         }
@@ -112,17 +105,5 @@ export class DirReaderBuilder
         }
 
         return result;
-    }
-
-    private validateManifestObject(data: { [k: string]: any }) {
-        if (typeof data.manifest_version !== 'number') {
-            throw new Error('manifest_version is missing');
-        }
-        if (typeof data.name !== 'string') {
-            throw new Error('name is missing');
-        }
-        if (typeof data.version !== 'string') {
-            throw new Error('version is missing');
-        }
     }
 }

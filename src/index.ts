@@ -1,7 +1,7 @@
 import { DirReaderBuilder } from './builder';
 export { IDirReaderOptions } from '../declarations/options';
 export { IZipOptions } from '../declarations/zipOptions';
-export { IManifestObject } from '../declarations/manifest';
+export { IManifestObject } from 'webext-buildtools-utils';
 
 export default DirReaderBuilder;
 
