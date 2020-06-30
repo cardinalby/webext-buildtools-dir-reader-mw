@@ -10,6 +10,7 @@ import {
 import { IDirReaderOptions } from '../declarations/options';
 import { DirReaderBuildResult, ManifestBuildAsset } from './buildResult';
 import { ZipPacker } from './zipPacker';
+import * as fs from "fs-extra";
 
 // noinspection JSUnusedGlobalSymbols
 export class DirReaderBuilder
@@ -72,7 +73,8 @@ export class DirReaderBuilder
         if (this._manifestRequired) {
             const manifestFilePath = path.join(this._inputDirPath, MANIFEST_FILE_NAME);
             this._logWrapper.info(`Reading '${manifestFilePath}'...`);
-            const data = validateManifestFile(manifestFilePath);
+            const manifestContents = await fs.readFile(manifestFilePath);
+            const data = validateManifestFile(manifestContents);
             this._logWrapper.info(`Manifest asset added to result`);
             result.getAssets().manifest = new ManifestBuildAsset(data);
         }
